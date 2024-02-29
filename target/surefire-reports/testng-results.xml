@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="12" passed="11" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-02-29T16:06:52 ICT" name="RestAssured Automation Tests" finished-at="2024-02-29T16:07:13 ICT" duration-ms="20616">
+    <groups>
+    </groups>
+    <test started-at="2024-02-29T16:06:52 ICT" name="Test" finished-at="2024-02-29T16:07:13 ICT" duration-ms="20616">
+      <class name="com.trello.tests.TrelloAPIs">
+        <test-method is-config="true" signature="createRequestSpecifications()[pri:0, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:06:52 ICT" name="createRequestSpecifications" finished-at="2024-02-29T16:06:53 ICT" duration-ms="1115" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createRequestSpecifications -->
+        <test-method signature="createBoard()[pri:0, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:06:54 ICT" name="createBoard" description="Create a new board" finished-at="2024-02-29T16:06:57 ICT" duration-ms="3260" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createBoard -->
+        <test-method signature="getCreatedBoard()[pri:1, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:06:57 ICT" name="getCreatedBoard" description="Get a created board" finished-at="2024-02-29T16:06:59 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1844" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCreatedBoard -->
+        <test-method signature="getMembershipsOfABoard()[pri:2, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:06:59 ICT" name="getMembershipsOfABoard" finished-at="2024-02-29T16:07:00 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1057" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getMembershipsOfABoard -->
+        <test-method signature="getAFieldOnABoard(java.lang.String)[pri:3, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:00 ICT" name="getAFieldOnABoard" data-provider="BoardField" finished-at="2024-02-29T16:07:01 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1264" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[idMemberCreator]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAFieldOnABoard -->
+        <test-method signature="getAFieldOnABoard(java.lang.String)[pri:3, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:01 ICT" name="getAFieldOnABoard" data-provider="BoardField" finished-at="2024-02-29T16:07:02 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1155" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[idOrganization]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAFieldOnABoard -->
+        <test-method signature="getAFieldOnABoard(java.lang.String)[pri:3, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:02 ICT" name="getAFieldOnABoard" data-provider="BoardField" finished-at="2024-02-29T16:07:04 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1322" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[desc]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAFieldOnABoard -->
+        <test-method signature="getAFieldOnABoard(java.lang.String)[pri:3, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:04 ICT" name="getAFieldOnABoard" data-provider="BoardField" finished-at="2024-02-29T16:07:05 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1005" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[name]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getAFieldOnABoard -->
+        <test-method signature="updateABoard()[pri:4, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:05 ICT" name="updateABoard" finished-at="2024-02-29T16:07:06 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1070" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[1 expectation failed.
+Expected status code <200> but was <401>.
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: 1 expectation failed.
+Expected status code <200> but was <401>.
+
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:60)
+at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:86)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:57)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+at com.trello.tests.TrelloAPIs.updateABoard(TrelloAPIs.java:79)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:829)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- updateABoard -->
+        <test-method signature="createList()[pri:5, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:06 ICT" name="createList" finished-at="2024-02-29T16:07:07 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1254" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createList -->
+        <test-method signature="createCard()[pri:6, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:07 ICT" name="createCard" finished-at="2024-02-29T16:07:08 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1193" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createCard -->
+        <test-method signature="uploadAttachment()[pri:7, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:08 ICT" name="uploadAttachment" finished-at="2024-02-29T16:07:10 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1639" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- uploadAttachment -->
+        <test-method signature="getCreatedBoardFail()[pri:8, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:10 ICT" name="getCreatedBoardFail" finished-at="2024-02-29T16:07:11 ICT" depends-on-methods="com.trello.tests.TrelloAPIs.createBoard" duration-ms="1033" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getCreatedBoardFail -->
+        <test-method is-config="true" signature="deleteBoard()[pri:0, instance:com.trello.tests.TrelloAPIs@3d7fb838]" started-at="2024-02-29T16:07:11 ICT" name="deleteBoard" finished-at="2024-02-29T16:07:13 ICT" duration-ms="2196" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteBoard -->
+      </class> <!-- com.trello.tests.TrelloAPIs -->
+    </test> <!-- Test -->
+  </suite> <!-- RestAssured Automation Tests -->
+</testng-results>
