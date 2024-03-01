@@ -1,7 +1,0 @@
-{
-  "baseUrl": "https://api.trello.com",
-  "boards": "/1/boards",
-  "cards": "/1/cards/",
-  "lists": "/1/lists",
-  "allBoards": "/1/members/me/boards"
-}

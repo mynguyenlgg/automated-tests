@@ -1,6 +1,8 @@
 package com.trello.base;
 
 import com.trello.api.SpecBuilder;
+import com.trello.api.applicationApi.BoardApi;
+import com.trello.tests.TrelloAPIs;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,9 +19,6 @@ public class BaseTest {
 
     @AfterClass
     public static void deleteBoard() {
-        given().spec(requestSpec)
-                .pathParam("id", boardID)
-                .body("")
-                .when().delete("1/boards/{id}");
+        BoardApi.deleteBoard(boardID);
     }
 }
