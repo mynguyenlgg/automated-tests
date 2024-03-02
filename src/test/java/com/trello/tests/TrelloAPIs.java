@@ -2,16 +2,18 @@ package com.trello.tests;
 
 import com.trello.api.StatusCode;
 import com.trello.api.applicationApi.BoardApi;
+import com.trello.base.BaseTest;
+import com.trello.pojo.Board;
 import com.trello.utils.FakerUtils;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
-import org.testng.annotations.*;
-import com.trello.base.BaseTest;
-import com.trello.pojo.Board;
+import org.testng.annotations.Test;
+
 import java.io.File;
+
 import static org.hamcrest.Matchers.equalTo;
 
-@Listeners(com.trello.base.Listeners.class)
+
 public class TrelloAPIs extends BaseTest {
 
     private static String listID;
@@ -27,6 +29,7 @@ public class TrelloAPIs extends BaseTest {
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/trello/schema/board.json")));
         res.then().body("name", equalTo(boardName));
     }
+
 
     @Test(dependsOnMethods = "createBoard", priority = 1, description = "Get a created board")
     public void getCreatedBoard() {

@@ -2,6 +2,7 @@ package com.trello.api;
 
 import com.trello.utils.config.PropertiesConfigLoader;
 import com.trello.utils.config.TrelloApiRoute;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -17,8 +18,9 @@ public class SpecBuilder {
                 setBasePath(TrelloApiRoute.trelloApiPath().getBasePath()).
                 addQueryParam("token", PropertiesConfigLoader.getInstance().getProperty("app_token"))
                 .addQueryParam("key", PropertiesConfigLoader.getInstance().getProperty("app_key"))
-                .setContentType(ContentType.JSON).
-                build();
+                .setContentType(ContentType.JSON)
+                .log(LogDetail.ALL).
+                build().filter(new AllureRestAssured());
     }
 
     public static ResponseSpecification getResponseSpec(){
