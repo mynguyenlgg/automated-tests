@@ -14,7 +14,7 @@ env:
   TEST_SUITE: ${{ github.event.inputs.test_suite_file || 'suite.testng.xml' }}
 
 jobs:
-  autotests:
+  run-test:
     name: Run tests and generate Allure Report
     runs-on: ubuntu-latest
     steps:
@@ -56,12 +56,7 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-      - name: Post the link to the report
-        if: always()
-        uses: Sibz/github-status-action@v1
-        with:
-          authToken: ${{secrets.GITHUB_TOKEN}}
-          context: 'Test report'
-          state: 'success'
-          sha: ${{github.event.pull_request.head.sha || github.sha}}
-          target_url: https://mynguyenlgg.github.io/RestAssuredFramework/${{ github.run_number }}
+      - name: Set Job Summary
+        run: |
+          echo "### The Allure Report below: " >> $GITHUB_STEP_SUMMARY
+          echo "#### https://mynguyenlgg.github.io/RestAssuredFramework/${{ github.run_number }} " >> $GITHUB_STEP_SUMMARY
