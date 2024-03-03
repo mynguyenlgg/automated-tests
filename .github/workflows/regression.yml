@@ -1,0 +1,67 @@
+name: Run all tests
+run-name: ${{ github.actor }} is running tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_suite_file:
+        description: 'Select the test suite xml file'
+        required: true
+        default: 'suite.testng.xml'
+        type: string
+
+env:
+  TEST_SUITE: ${{ github.event.inputs.test_suite_file || 'suite.testng.xml' }}
+
+jobs:
+  autotests:
+    name: Run tests and generate Allure Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+
+      - name: Set up Java 11
+        uses: actions/setup-java@v4.0.0
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run Test
+        run: mvn clean -DsuiteFile=src/test/resources/${{env.TEST_SUITE}}
+        continue-on-error: true
+
+      - name: Setup Allure History
+        uses: actions/checkout@v4.1.1
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          allure_results: target/allure-results
+          allure_history: allure-history
+          keep_reports: 10
+
+      - name: Publish Allure Report
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+
+      - name: Post the link to the report
+        if: always()
+        uses: Sibz/github-status-action@v1
+        with:
+          authToken: ${{secrets.GITHUB_TOKEN}}
+          context: 'Test report'
+          state: 'success'
+          sha: ${{github.event.pull_request.head.sha || github.sha}}
+          target_url: https://mynguyenlgg.github.io/RestAssuredFramework/${{ github.run_number }}

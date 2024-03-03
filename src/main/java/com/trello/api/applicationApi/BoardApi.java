@@ -5,7 +5,6 @@ import com.trello.utils.config.TrelloApiRoute;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import java.io.File;
 import java.util.Map;
 
 

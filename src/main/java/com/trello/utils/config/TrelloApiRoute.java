@@ -13,6 +13,6 @@ public class TrelloApiRoute {
     private String allBoards;
 
     public static TrelloApiRoute trelloApiPath() {
-        return JsonUtils.to("src/test/resources/configs/api_path.json", TrelloApiRoute.class);
+        return JsonUtils.to("src/main/resources/configs/api_path.json", TrelloApiRoute.class);
     }
 }
