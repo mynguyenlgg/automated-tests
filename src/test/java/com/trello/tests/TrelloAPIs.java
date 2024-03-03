@@ -26,7 +26,7 @@ public class TrelloAPIs extends BaseTest {
         Response res = BoardApi.createBoard(boardName);
         boardID = res.as(Board.class).getId();
         res.then().statusCode(StatusCode.CODE_200.code);
-        res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/trello/schema/board.json")));
+        res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/schema/board.json")));
         res.then().body("name", equalTo(boardName));
     }
 
