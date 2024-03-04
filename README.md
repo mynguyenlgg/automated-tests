@@ -19,3 +19,5 @@ mvn clean test -DsuiteFile=src/test/resources/suite.testng.xml
 allure generate --single-file target/allure-results --clean
 ```
 The report will be generated in allure-report folder with name is index.html file
+
+![Screenshot](allure-report.png)
