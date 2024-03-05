@@ -15,7 +15,7 @@ public class BoardApi {
 
     @Step
     public static Response getBoard(String id) {
-        return RestResource.get(PATH, Map.of("id", id));
+        return RestResource.get(PATH + "/{id}", Map.of("id", id));
     }
 
     @Step

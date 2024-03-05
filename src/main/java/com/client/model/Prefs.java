@@ -1,11 +1,12 @@
 package com.client.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class Prefs {
 
     private String permissionLevel;
@@ -19,12 +20,12 @@ public class Prefs {
     private boolean isTemplate;
     private String cardAging;
     private boolean calendarFeedEnabled;
-    private ArrayList<Object> hiddenPluginBoardButtons;
-    private ArrayList<SwitcherView> switcherViews;
+    private List<Object> hiddenPluginBoardButtons;
+    private List<SwitcherView> switcherViews;
     private String background;
     private String backgroundColor;
-    private Object backgroundImage;
-    private Object backgroundImageScaled;
+    private String backgroundImage;
+    private List<ImageDescriptor> backgroundImageScaled;
     private boolean backgroundTile;
     private String backgroundBrightness;
     private String backgroundBottomColor;
@@ -34,14 +35,4 @@ public class Prefs {
     private boolean canBeOrg;
     private boolean canBePrivate;
     private boolean canInvite;
-    @JsonProperty("isTemplate")
-    public boolean isTemplate() {
-        return isTemplate;
-    }
-    @JsonProperty("isTemplate")
-    public void setTemplate(boolean template) {
-        isTemplate = template;
-    }
-
-
 }
