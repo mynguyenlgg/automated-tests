@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Sun Mar 03 01:53:17 GMT 2024","Sun Mar 03 01:53:21 GMT 2024","4143","RestAssured Automation Tests","Test","com.trello.tests.TrelloAPIs","com.trello.tests.TrelloAPIs","createBoard","Create a new board",""
-"passed","Sun Mar 03 01:53:21 GMT 2024","Sun Mar 03 01:53:22 GMT 2024","229","RestAssured Automation Tests","Test","com.trello.tests.TrelloAPIs","com.trello.tests.TrelloAPIs","getCreatedBoard","Get a created board",""
