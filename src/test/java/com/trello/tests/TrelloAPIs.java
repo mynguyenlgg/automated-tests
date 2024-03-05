@@ -1,6 +1,6 @@
 package com.trello.tests;
 
-import com.trello.api.StatusCode;
+import com.trello.enums.StatusCode;
 import com.trello.api.applicationApi.BoardApi;
 import com.trello.base.BaseTest;
 import com.trello.pojo.Board;
@@ -25,7 +25,7 @@ public class TrelloAPIs extends BaseTest {
     public void createBoard() {
         Response res = BoardApi.createBoard(boardName);
         boardID = res.as(Board.class).getId();
-        res.then().statusCode(StatusCode.CODE_200.code);
+        res.then().statusCode(StatusCode.CODE_200.getCode());
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/schema/board.json")));
         res.then().body("name", equalTo(boardName));
     }
@@ -34,7 +34,7 @@ public class TrelloAPIs extends BaseTest {
     @Test(dependsOnMethods = "createBoard", priority = 1, description = "Get a created board")
     public void getCreatedBoard() {
         Response res = BoardApi.getBoard(boardID);
-        res.then().statusCode(StatusCode.CODE_200.code);
+        res.then().statusCode(StatusCode.CODE_200.getCode());
         res.then().body("id", equalTo(boardID))
                   .body("name", equalTo(boardName));
     }
