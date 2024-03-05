@@ -1,10 +1,8 @@
-package com.trello.tests;
+package com.client.tests;
 
-import com.trello.enums.StatusCode;
-import com.trello.api.applicationApi.BoardApi;
-import com.trello.base.BaseTest;
-import com.trello.pojo.Board;
-import com.trello.utils.FakerUtils;
+import com.client.request.BoardApi;
+import com.client.model.Board;
+import com.client.utils.FakerUtils;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -14,7 +12,7 @@ import java.io.File;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class TrelloAPIs extends BaseTest {
+public class BoardTests extends BaseTest {
 
     private static String listID;
     private static String cardID;
@@ -25,7 +23,7 @@ public class TrelloAPIs extends BaseTest {
     public void createBoard() {
         Response res = BoardApi.createBoard(boardName);
         boardID = res.as(Board.class).getId();
-        res.then().statusCode(StatusCode.CODE_200.getCode());
+        res.then().statusCode(200);
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/resources/schema/board.json")));
         res.then().body("name", equalTo(boardName));
     }
@@ -34,7 +32,7 @@ public class TrelloAPIs extends BaseTest {
     @Test(dependsOnMethods = "createBoard", priority = 1, description = "Get a created board")
     public void getCreatedBoard() {
         Response res = BoardApi.getBoard(boardID);
-        res.then().statusCode(StatusCode.CODE_200.getCode());
+        res.then().statusCode(200);
         res.then().body("id", equalTo(boardID))
                   .body("name", equalTo(boardName));
     }

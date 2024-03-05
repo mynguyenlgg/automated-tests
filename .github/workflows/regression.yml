@@ -7,11 +7,11 @@ on:
       test_suite_file:
         description: 'Select the test suite xml file'
         required: true
-        default: 'suite.testng.xml'
+        default: 'regression.xml'
         type: string
 
 env:
-  TEST_SUITE: ${{ github.event.inputs.test_suite_file || 'suite.testng.xml' }}
+  TEST_SUITE: ${{ github.event.inputs.test_suite_file || 'regression.xml' }}
 
 jobs:
   run-test:
@@ -29,7 +29,7 @@ jobs:
           cache: 'maven'
 
       - name: Run Test
-        run: mvn clean test -DsuiteFile=src/test/resources/${{env.TEST_SUITE}}
+        run: mvn clean test -DsuiteFile=src/resources/${{env.TEST_SUITE}}
         continue-on-error: true
 
       - name: Setup Allure History
