@@ -1,4 +1,4 @@
-package com.trello.utils;
+package com.client.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

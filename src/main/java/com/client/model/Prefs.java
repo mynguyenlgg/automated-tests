@@ -1,4 +1,4 @@
-package com.trello.pojo;
+package com.client.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

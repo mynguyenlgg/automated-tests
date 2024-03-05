@@ -1,12 +1,12 @@
-package com.trello.api;
+package com.client.request;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import java.util.Map;
 
-import static com.trello.api.SpecBuilder.getRequestSpec;
-import static com.trello.api.SpecBuilder.getResponseSpec;
+import static com.client.request.SpecBuilder.getRequestSpec;
+import static com.client.request.SpecBuilder.getResponseSpec;
 
 public class RestResource {
 

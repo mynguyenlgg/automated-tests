@@ -1,4 +1,4 @@
-package com.trello.utils;
+package com.client.utils;
 
 import com.github.javafaker.Faker;
 

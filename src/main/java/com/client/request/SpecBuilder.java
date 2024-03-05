@@ -1,7 +1,6 @@
-package com.trello.api;
+package com.client.request;
 
-import com.trello.utils.config.PropertiesConfigLoader;
-import com.trello.utils.config.TrelloApiRoute;
+import com.client.config.PropertiesConfigLoader;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -11,11 +10,12 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class SpecBuilder {
-
+    private final static String BASE_URL = System.getProperty("baseUrl", "https://api.trello.com/");
+    private final static String BASE_PATH= System.getProperty("basePath", "1/");
     public static RequestSpecification getRequestSpec(){
         return new RequestSpecBuilder().
-                setBaseUri(TrelloApiRoute.trelloApiPath().getBaseUrl()).
-                setBasePath(TrelloApiRoute.trelloApiPath().getBasePath()).
+                setBaseUri(BASE_URL).
+                setBasePath(BASE_PATH).
                 addQueryParam("token", PropertiesConfigLoader.getInstance().getProperty("app_token"))
                 .addQueryParam("key", PropertiesConfigLoader.getInstance().getProperty("app_key"))
                 .setContentType(ContentType.JSON)

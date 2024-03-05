@@ -1,6 +1,6 @@
-package com.trello.utils.config;
+package com.client.config;
 
-import com.trello.utils.PropertyUtils;
+import com.client.utils.PropertyUtils;
 
 import java.util.Properties;
 
