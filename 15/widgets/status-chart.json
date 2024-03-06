@@ -1,0 +1,1 @@
+[{"uid":"d572e1237e376551","name":"Create a new board","time":{"start":1709692151232,"stop":1709692154726,"duration":3494},"status":"passed","severity":"normal"},{"uid":"29c2e2185c582f68","name":"Get a created board","time":{"start":1709692154811,"stop":1709692155038,"duration":227},"status":"passed","severity":"normal"}]
