@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.is;
 public class TC001_CreateBoard extends BaseTest {
     private String boardName = FakerUtils.generateName();
     private String boardID;
+
     @AfterTest
     public void cleanUp() {
         BoardApi.deleteBoard(boardID);
