@@ -8,15 +8,10 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
     protected static RequestSpecification requestSpec;
-    protected static String boardID;
 
     @BeforeClass
     public static void createRequestSpecifications() {
         requestSpec = SpecBuilder.getRequestSpec();
     }
 
-    @AfterClass
-    public static void deleteBoard() {
-        BoardApi.deleteBoard(boardID);
-    }
 }
