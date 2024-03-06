@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://api.trello.com/",
+  "basePath": "1/",
+  "appKey": "",
+  "appToken": ""
+}

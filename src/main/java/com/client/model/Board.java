@@ -1,13 +1,15 @@
 package com.client.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Board {
-
+    private String id;
     private String name;
     private String desc;
-    private Object descData;
+    private String descData;
     private boolean closed;
     private String idOrganization;
     private Object idEnterprise;
@@ -17,6 +19,4 @@ public class Board {
     private Prefs prefs;
     private LabelNames labelNames;
     private Limits limits;
-
-    private String id;
 }
