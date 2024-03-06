@@ -22,7 +22,7 @@ public class TC003_DeleteBoard extends BaseTest {
     }
 
     @Test(description = "TC003 - Delete a board")
-    public void getCreatedBoard() {
+    public void deleteBoard() {
         Response response = BoardApi.deleteBoard(boardID);
         assertThat("Incorrect response code", response.getStatusCode(), is(200));
     }
