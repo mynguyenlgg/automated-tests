@@ -1,9 +1,8 @@
 package com.client.config;
 
-import lombok.Getter;
+import com.client.utils.JsonUtils;
 import lombok.Setter;
 
-@Getter
 @Setter
 public class TestConfig {
     private String baseUrl;
@@ -14,15 +13,11 @@ public class TestConfig {
     private static TestConfig instance = null;
 
     private TestConfig() {
-        this.baseUrl = "https://api.trello.com/";
-        this.basePath = "1/";
-        this.appKey = "cdceab0688f6033931a439e74f68bc78";
-        this.appToken = "ATTA41c7f6ff603c19b49e385104f6c5a26f8945065fd2bd7bd1e3559d0296ada647CE382428";
     }
 
     public static TestConfig getInstance() {
         if (instance == null) {
-            instance = new TestConfig();
+            instance = JsonUtils.to("src/main/resources/config/test_config.json", TestConfig.class);
         }
         return instance;
     }
