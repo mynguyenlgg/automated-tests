@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Mar 06 04:57:16 GMT 2024","Wed Mar 06 04:57:18 GMT 2024","2593","RestAssured Automation Tests","Test","com.client.tests.BoardTests","com.client.tests.BoardTests","createBoard","Create a new board",""
