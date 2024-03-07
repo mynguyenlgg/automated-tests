@@ -11,7 +11,7 @@ Technologies/Tools used in building the framework
 
 # Run Tests
 ```
-mvn clean test -DsuiteFile="src/test/resources/suite.testng.xml"
+mvn clean test -DsuiteFile="src/test/resources/suites/regression.xml"
 ```
 
 # Generate Allure Report

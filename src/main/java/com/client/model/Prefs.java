@@ -2,7 +2,6 @@ package com.client.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter
@@ -34,5 +33,6 @@ public class Prefs {
     private boolean canBeEnterprise;
     private boolean canBeOrg;
     private boolean canBePrivate;
+
     private boolean canInvite;
 }

@@ -1,33 +1,29 @@
 package com.client.config;
 
-import com.client.utils.JsonUtils;
 import lombok.Setter;
-
 @Setter
-public class TestConfig {
+public class Configuration {
     private String baseUrl;
-    private String basePath;
     private String appKey;
     private String appToken;
 
-    private static TestConfig instance = null;
+    private static Configuration instance = null;
 
-    private TestConfig() {
+    private Configuration() {
     }
 
-    public static TestConfig getInstance() {
+    public static Configuration getInstance() {
         if (instance == null) {
-            instance = JsonUtils.to("src/main/resources/config/test_config.json", TestConfig.class);
+            instance = new Configuration();
+            instance.setBaseUrl("https://api.trello.com/1/");
+            instance.setAppKey(System.getenv("CLIENT_KEY"));
+            instance.setAppToken(System.getenv("CLIENT_TOKEN"));
         }
         return instance;
     }
 
     public String getBaseUrl() {
         return System.getProperty("baseUrl", this.baseUrl);
-    }
-
-    public String getBasePath() {
-        return System.getProperty("basePath", this.basePath);
     }
 
     public String getAppKey() {
