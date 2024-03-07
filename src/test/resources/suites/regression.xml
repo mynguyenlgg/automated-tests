@@ -3,7 +3,7 @@
 <suite name="RestAssured Automation Tests">
     <test name="Test" parallel="classes">
         <packages>
-            <package name="com.client.tests"/>
+            <package name="com.client.tests.Board.*"/>
         </packages>
     </test>
 </suite>

@@ -5,8 +5,7 @@ import com.client.model.Board;
 import com.client.tests.BaseTest;
 import com.client.utils.FakerUtils;
 import io.restassured.response.Response;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.File;
 
@@ -19,7 +18,7 @@ public class TC001_CreateBoard extends BaseTest {
     private String boardName = FakerUtils.generateName();
     private String boardID;
 
-    @AfterTest
+    @AfterClass
     public void cleanUp() {
         BoardApi.deleteBoard(boardID);
     }
