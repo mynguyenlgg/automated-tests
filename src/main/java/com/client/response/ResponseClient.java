@@ -1,38 +1,58 @@
 package com.client.response;
 
+import io.restassured.http.Headers;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import lombok.Getter;
-import java.util.Map;
-import java.util.stream.Collectors;
+import lombok.Setter;
+import org.hamcrest.Matcher;
 
-@Getter
-public class ResponseClient<T>{
-    private final Response response;
-    private final Class<T> responseType;
+import java.io.File;
 
-    public final T body;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 
-    public final String bodyString;
+public class ResponseClient {
 
-    public final int statusCode;
+    private static final String SCHEMA_FILE = "src/test/resources/schema/";
 
-    public final Map<String, T> headers;
+    @Setter
+    @Getter
+    private Response response;
 
-    public ResponseClient(Response response, Class<T> responseType) {
+    private ResponseBody body;
+
+    private String bodyString;
+
+    private int statusCode;
+
+    private Headers headers;
+
+    private JsonSchemaValidator matchesSchema;
+
+    public ResponseClient(Response response) {
         this.response = response;
-        this.responseType = responseType;
-        this.body = response.as(responseType);
-        this.bodyString = response.asString();
-        this.statusCode = response.getStatusCode();
-        this.headers = response.getHeaders().asList().stream()
-                .collect(Collectors.toMap(header -> header.getName(), header -> (T) header.getValue()));
+        this.body = response.getBody();
     }
 
-    public String getStatusMessage() {
-        return this.response.getStatusLine();
+    public <T> T getBody(Class<T> type) {
+        return this.response.as(type);
     }
 
-    public String getHeader(String headerName) {
-        return (String) this.headers.get(headerName);
+    public String getBodyString() {
+        if (this.body == null) {
+            throw new RuntimeException("The body is not found. Please check the request!");
+        }
+        return this.body.asString();
+    }
+
+    public int getStatusCode() {
+        return this.response.getStatusCode();
+    }
+
+    public boolean isMatchesSchema(String fileName) {
+        String actual = getBodyString();
+        Matcher<String> matcher = matchesJsonSchema(new File(SCHEMA_FILE + fileName));
+        return matcher.matches(actual);
     }
 }

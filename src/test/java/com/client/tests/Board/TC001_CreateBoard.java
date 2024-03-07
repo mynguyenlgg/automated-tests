@@ -1,14 +1,12 @@
 package com.client.tests.Board;
 
 import com.client.model.Board;
-import com.client.request.BoardClient;
 import com.client.response.ResponseClient;
+import com.client.services.BoardService;
 import com.client.utils.FakerUtils;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
 
-import java.io.File;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -17,20 +15,21 @@ public class TC001_CreateBoard {
     private String boardName = FakerUtils.generateName();
     private String boardID;
 
-    BoardClient boardApi = new BoardClient();
+    BoardService boardService = new BoardService();
 
     @AfterClass
     public void cleanUp() {
-        boardApi.deleteBoard(boardID);
+        boardService.deleteBoard(boardID);
     }
 
     @Test(description = "TC001 - Create a new board")
     public void createBoard() {
-        ResponseClient<Board> response = boardApi.createBoard(boardName);
-        boardID = response.getBody().getId();
+        ResponseClient responseClient = boardService.createBoard(boardName);
+        Board board = responseClient.getBody(Board.class);
+        boardID = board.getId();
 
-        assertThat("Incorrect response code", response.getStatusCode(), is(200));
-        assertThat("Incorrect Board Name", response.body.getName(), equalTo(boardName));
-        assertThat(response.bodyString, matchesJsonSchema(new File("src/test/resources/schema/board.json")));
+        assertThat("Incorrect response code", responseClient.getStatusCode(), is(200));
+        assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
+        assertThat("Incorrect Board schema", responseClient.isMatchesSchema("board.json"));
     }
 }

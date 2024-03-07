@@ -1,16 +1,15 @@
 package com.client.config;
 
+import lombok.Getter;
 import lombok.Setter;
 @Setter
+@Getter
 public class Configuration {
     private String baseUrl;
     private String appKey;
     private String appToken;
 
     private static Configuration instance = null;
-
-    private Configuration() {
-    }
 
     public static Configuration getInstance() {
         if (instance == null) {
@@ -20,17 +19,5 @@ public class Configuration {
             instance.setAppToken(System.getenv("CLIENT_TOKEN"));
         }
         return instance;
-    }
-
-    public String getBaseUrl() {
-        return System.getProperty("baseUrl", this.baseUrl);
-    }
-
-    public String getAppKey() {
-        return System.getProperty("appKey", this.appKey);
-    }
-
-    public String getAppToken() {
-        return System.getProperty("appToken", this.appToken);
     }
 }
