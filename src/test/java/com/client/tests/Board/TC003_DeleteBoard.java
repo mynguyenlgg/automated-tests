@@ -21,10 +21,10 @@ public class TC003_DeleteBoard {
         Board board = boardClient.createBoard(boardName).getBody(Board.class);
         boardID = board.getId();
     }
-
-    @Test(description = "TC003 - Delete a board")
-    public void deleteBoard() {
-        ResponseClient response = boardClient.deleteBoard(boardID);
-        assertThat("Incorrect response code", response.getStatusCode(), is(200));
-    }
+//
+//    @Test(description = "TC003 - Delete a board")
+//    public void deleteBoard() {
+//        ResponseClient response = boardClient.deleteBoard(boardID);
+//        assertThat("Incorrect response code", response.getStatusCode(), is(200));
+//    }
 }

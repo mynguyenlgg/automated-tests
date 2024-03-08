@@ -18,6 +18,9 @@ import java.util.Map;
 
 public class BaseService {
     protected final Configuration configuration = Configuration.getInstance();
+    protected RequestSpecification requestSpecification;
+
+    protected RequestSpecification request;
 
     protected RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder()
@@ -26,43 +29,33 @@ public class BaseService {
                 .setContentType(ContentType.JSON)
                 .build()
                 .filter(new AllureRestAssured());
-    };
+    }
 
     protected ResponseSpecification getResponseSpec() {
         return new ResponseSpecBuilder().build();
     }
 
-    protected ResponseClient get(Map<String, ?> params, String path) {
-        return pathParamsRequest(Method.GET, params, path);
+    protected ResponseClient get(ParamsBuilder params, String path) {
+        return request(params, Method.GET, path);
     }
 
-    protected ResponseClient delete(Map<String, ?> params, String path) {
-        return pathParamsRequest(Method.DELETE, params, path);
+    protected ResponseClient delete(ParamsBuilder params, String path) {
+        return request(params, Method.DELETE, path);
     }
 
-    protected ResponseClient post(Map<String, ?> params, String path) {
-        return queryParamsRequest(Method.POST, params, path);
+    protected ResponseClient post(ParamsBuilder params, String path) {
+        return request(params, Method.POST, path);
     }
 
-    private RequestSpecification getRequest() {
-        return RestAssured.given(this.getRequestSpec());
-    }
-
-    protected ResponseClient pathParamsRequest(Method method, Map<String, ?> params, String path) {
-        Response response = this.getRequest()
-                .pathParams(params)
-                .when()
-                .request(method, path)
-                .then()
-                .spec(getResponseSpec())
-                .extract().response();
-        return new ResponseClient(response);
-    }
-
-    protected ResponseClient queryParamsRequest(Method method, Map<String, ?> params, String path) {
-        Response response =  this.getRequest()
-                .queryParams(params)
-                .when()
+    protected ResponseClient request(ParamsBuilder params, Method method, String path) {
+        this.request =  RestAssured.given(this.requestSpecification);
+        if (params.getPathParams() != null) {
+            this.request.pathParams(params.getPathParams());
+        }
+        if (params.getQueryParams() != null) {
+            this.request.queryParams(params.getQueryParams());
+        }
+        Response response = this.request
                 .request(method, path)
                 .then()
                 .spec(getResponseSpec())
