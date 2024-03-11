@@ -1,10 +1,12 @@
 package com.client.services;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.Map;
 
-@Data
+@Setter
+@Getter
 @Builder
 public class ParamsBuilder<String, V> {
     private Map<String, V> pathParams;
