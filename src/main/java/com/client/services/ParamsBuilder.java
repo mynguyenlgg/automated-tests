@@ -1,26 +1,12 @@
 package com.client.services;
 
-import com.google.common.collect.ImmutableMap;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import lombok.Data;
 import java.util.Map;
 
-@Getter
-@Setter
+@Data
 @Builder
-public class ParamsBuilder {
-    private Map<?, ?> pathParams;
-    private Map<?, ?> queryParams;
-
-    private ParamsBuilder(Map<?, ?> pathParams, Map<?, ?> queryParams) {
-        this.pathParams = pathParams;
-        this.queryParams = queryParams;
-    }
-
-    public <K, V> void setPathParams(K k1, V v1) {
-        this.pathParams = ImmutableMap.of(k1, v1);
-    }
+public class ParamsBuilder<String, V> {
+    private Map<String, V> pathParams;
+    private Map<String, V> queryParams;
 }

@@ -6,21 +6,25 @@ import io.qameta.allure.Step;
 import java.util.Map;
 
 public class BoardService extends BaseService {
-    private final String PATH = "boards/";
+    private final String BOARD_PATH = "boards/";
+    private final String BOARD_ID_PATH = BOARD_PATH + "{id}";
 
-    public BoardService () {
+    public BoardService() {
         this.requestSpecification = super.getRequestSpec()
                 .queryParams("key", this.configuration.getAppKey())
                 .queryParams("token", this.configuration.getAppToken());
     }
 
+    private ParamsBuilder<String, String> getPathParamBoard(String boardId) {
+        return ParamsBuilder.<String, String>builder().pathParams(Map.of("id", boardId)).build();
+    }
+
     @Step
     public ResponseClient deleteBoard(String id) {
-        if (id != null) {
+        if (id == null) {
             throw new RuntimeException("Board ID cannot be null.");
         }
-        ParamsBuilder paramsBuilder = ParamsBuilder.builder().pathParams(Map.of("id", id)).build();
-        return this.delete(paramsBuilder, PATH + "{id}");
+        return this.delete(BOARD_ID_PATH, getPathParamBoard(id));
     }
 
     @Step
@@ -28,12 +32,12 @@ public class BoardService extends BaseService {
         if (id == null) {
             throw new RuntimeException("Board ID cannot be null.");
         }
-        return this.get(Map.of("id", id), PATH + "{id}");
+        return this.get(BOARD_ID_PATH, getPathParamBoard(id));
     }
 
     @Step
     public ResponseClient createBoard(String boardName) {
-        ParamsBuilder paramsBuilder = ParamsBuilder.builder().queryParams(Map.of("name", boardName)).build();
-        return this.post(paramsBuilder, PATH);
-}
+        ParamsBuilder<String, String> paramsBuilder = ParamsBuilder.<String, String>builder().queryParams(Map.of("name", boardName)).build();
+        return this.post(BOARD_PATH, paramsBuilder);
+    }
 }

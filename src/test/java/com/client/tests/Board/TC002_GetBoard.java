@@ -22,18 +22,18 @@ public class TC002_GetBoard {
         boardID = board.getId();
     }
 
-//    @AfterClass
-//    public void cleanUp() {
-//        boardClient.deleteBoard(boardID);
-//    }
-//
-//    @Test(description = "TC002 - Get a created board")
-//    public void getCreatedBoard() {
-//        ResponseClient response = boardClient.getBoard(boardID);
-//        Board board = response.getBody(Board.class);
-//
-//        assertThat("Incorrect response code", response.getStatusCode(), is(200));
-//        assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
-//        assertThat("Incorrect Board ID", board.getId(), equalTo(boardID));
-//    }
+    @AfterClass
+    public void cleanUp() {
+        boardClient.deleteBoard(boardID);
+    }
+
+    @Test(description = "TC002 - Get a created board")
+    public void getCreatedBoard() {
+        ResponseClient response = boardClient.getBoard(boardID);
+        Board board = response.getBody(Board.class);
+
+        assertThat("Incorrect response code", response.getStatusCode(), is(200));
+        assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
+        assertThat("Incorrect Board ID", board.getId(), equalTo(boardID));
+    }
 }

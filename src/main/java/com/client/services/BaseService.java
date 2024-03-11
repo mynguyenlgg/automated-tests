@@ -14,8 +14,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import java.util.Map;
-
 public class BaseService {
     protected final Configuration configuration = Configuration.getInstance();
     protected RequestSpecification requestSpecification;
@@ -35,26 +33,29 @@ public class BaseService {
         return new ResponseSpecBuilder().build();
     }
 
-    protected ResponseClient get(ParamsBuilder params, String path) {
-        return request(params, Method.GET, path);
+    protected <V> ResponseClient  get(String path, ParamsBuilder<String, V> params) {
+        return request(Method.GET, path, params);
     }
 
-    protected ResponseClient delete(ParamsBuilder params, String path) {
-        return request(params, Method.DELETE, path);
+    protected <V> ResponseClient delete(String path, ParamsBuilder<String, V> params) {
+        return request(Method.DELETE, path, params);
     }
 
-    protected ResponseClient post(ParamsBuilder params, String path) {
-        return request(params, Method.POST, path);
+    protected <V> ResponseClient post(String path, ParamsBuilder<String, V> params) {
+        return request(Method.POST, path, params);
     }
 
-    protected ResponseClient request(ParamsBuilder params, Method method, String path) {
+    protected <V> ResponseClient request(Method method, String path, ParamsBuilder<String, V> params) {
         this.request =  RestAssured.given(this.requestSpecification);
-        if (params.getPathParams() != null) {
-            this.request.pathParams(params.getPathParams());
+        if (params != null) {
+            if (params.getPathParams() != null) {
+                this.request.pathParams(params.getPathParams());
+            }
+            if (params.getQueryParams() != null) {
+                this.request.queryParams(params.getQueryParams());
+            }
         }
-        if (params.getQueryParams() != null) {
-            this.request.queryParams(params.getQueryParams());
-        }
+
         Response response = this.request
                 .request(method, path)
                 .then()
