@@ -10,9 +10,6 @@ on:
         default: 'regression.xml'
         type: string
 
-env:
-  TEST_SUITE: ${{ github.event.inputs.test_suite_file || 'regression.xml' }}
-
 jobs:
   run-test:
     name: Run tests and generate Allure Report
@@ -28,8 +25,11 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Run Test
-        run: mvn clean test -DsuiteFile=src/test/resources/suites/${{env.TEST_SUITE}}
+      - name: Run Tests
+        env:
+          CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+          CLIENT_TOKEN: ${{ secrets.CLIENT_TOKEN }}
+        run: mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}}
         continue-on-error: true
 
       - name: Setup Allure History
