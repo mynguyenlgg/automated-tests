@@ -3,8 +3,6 @@ package com.client.services;
 import com.client.response.ResponseClient;
 import io.qameta.allure.Step;
 
-import java.util.Map;
-
 public class BoardService extends BaseService {
     private final String BOARD_PATH = "boards/";
     private final String BOARD_ID_PATH = BOARD_PATH + "{id}";
@@ -16,7 +14,7 @@ public class BoardService extends BaseService {
     }
 
     private ParamsBuilder<String, String> getPathParamBoard(String boardId) {
-        return ParamsBuilder.<String, String>builder().pathParams(Map.of("id", boardId)).build();
+        return ParamsBuilder.<String, String>builder().build().pathParam("id", boardId);
     }
 
     @Step
@@ -37,7 +35,8 @@ public class BoardService extends BaseService {
 
     @Step
     public ResponseClient createBoard(String boardName) {
-        ParamsBuilder<String, String> paramsBuilder = ParamsBuilder.<String, String>builder().queryParams(Map.of("name", boardName)).build();
+        ParamsBuilder<String, String> paramsBuilder = ParamsBuilder.<String, String>builder().build();
+        paramsBuilder.queryParam("name", boardName);
         return this.post(BOARD_PATH, paramsBuilder);
     }
 }
