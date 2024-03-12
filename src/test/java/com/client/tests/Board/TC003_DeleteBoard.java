@@ -13,7 +13,6 @@ import static org.hamcrest.Matchers.*;
 public class TC003_DeleteBoard {
     private String boardName = FakerUtils.generateName();
     private String boardID;
-
     BoardService boardClient = new BoardService();
 
     @BeforeClass

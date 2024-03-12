@@ -33,7 +33,7 @@ public class BaseService {
         return new ResponseSpecBuilder().build();
     }
 
-    protected <V> ResponseClient  get(String path, ParamsBuilder<String, V> params) {
+    protected <V> ResponseClient get(String path, ParamsBuilder<String, V> params) {
         return request(Method.GET, path, params);
     }
 
@@ -46,7 +46,7 @@ public class BaseService {
     }
 
     protected <V> ResponseClient request(Method method, String path, ParamsBuilder<String, V> params) {
-        this.request =  RestAssured.given(this.requestSpecification);
+        this.request = RestAssured.given(this.requestSpecification);
         if (params != null) {
             if (params.getPathParams() != null) {
                 this.request.pathParams(params.getPathParams());

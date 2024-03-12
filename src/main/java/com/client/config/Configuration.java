@@ -10,11 +10,7 @@ public class Configuration {
     private String appToken;
 
     private static Configuration instance = null;
-
-    private Configuration() {
-
-    }
-
+    
     public static Configuration getInstance() {
         if (instance == null) {
             instance = new Configuration();
