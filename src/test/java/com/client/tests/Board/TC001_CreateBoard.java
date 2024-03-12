@@ -14,7 +14,6 @@ import static org.hamcrest.Matchers.is;
 public class TC001_CreateBoard {
     private String boardName = FakerUtils.generateName();
     private String boardID;
-
     BoardService boardService = new BoardService();
 
     @AfterClass

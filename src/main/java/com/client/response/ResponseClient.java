@@ -1,7 +1,5 @@
 package com.client.response;
 
-import io.restassured.http.Headers;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import lombok.Getter;
@@ -21,14 +19,6 @@ public class ResponseClient {
     private Response response;
 
     private ResponseBody body;
-
-    private String bodyString;
-
-    private int statusCode;
-
-    private Headers headers;
-
-    private JsonSchemaValidator matchesSchema;
 
     public ResponseClient(Response response) {
         this.response = response;

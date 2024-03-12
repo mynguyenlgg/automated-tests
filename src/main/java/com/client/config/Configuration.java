@@ -2,6 +2,7 @@ package com.client.config;
 
 import lombok.Getter;
 import lombok.Setter;
+
 @Setter
 @Getter
 public class Configuration {
@@ -12,7 +13,6 @@ public class Configuration {
     private static Configuration instance = null;
 
     private Configuration() {
-
     }
 
     public static Configuration getInstance() {
