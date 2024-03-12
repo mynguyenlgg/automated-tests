@@ -14,7 +14,7 @@ public class BoardService extends BaseService {
     }
 
     private ParamsBuilder<String, String> getPathParamBoard(String boardId) {
-        return ParamsBuilder.<String, String>builder().build().pathParam("id", boardId);
+        return this.getParamsBuilder().pathParam("id", boardId);
     }
 
     @Step
@@ -35,8 +35,6 @@ public class BoardService extends BaseService {
 
     @Step
     public ResponseClient createBoard(String boardName) {
-        ParamsBuilder<String, String> paramsBuilder = ParamsBuilder.<String, String>builder().build();
-        paramsBuilder.queryParam("name", boardName);
-        return this.post(BOARD_PATH, paramsBuilder);
+        return this.post(BOARD_PATH, this.getParamsBuilder().queryParam("name", boardName));
     }
 }
