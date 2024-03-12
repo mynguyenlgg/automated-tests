@@ -29,6 +29,10 @@ public class BaseService {
                 .filter(new AllureRestAssured());
     }
 
+    protected ParamsBuilder<String, String> getParamsBuilder() {
+        return ParamsBuilder.<String, String>builder().build();
+    }
+
     protected ResponseSpecification getResponseSpec() {
         return new ResponseSpecBuilder().build();
     }
