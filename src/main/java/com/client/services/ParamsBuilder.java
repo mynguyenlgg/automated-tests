@@ -17,16 +17,12 @@ public class ParamsBuilder<String, T> {
     private Map<String, T> queryParams = new HashMap<>();
 
     public ParamsBuilder<String, T> pathParam(String key, T value) {
-        if (this.pathParams != null) {
-            this.pathParams.put(key, value);
-        }
+        this.pathParams.put(key, value);
         return this;
     }
 
     public ParamsBuilder<String, T> queryParam(String key, T value) {
-        if (this.queryParams != null) {
-            this.queryParams.put(key, value);
-        }
+        this.queryParams.put(key, value);
         return this;
     }
 }
