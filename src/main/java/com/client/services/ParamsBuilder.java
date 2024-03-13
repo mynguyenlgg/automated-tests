@@ -1,14 +1,28 @@
 package com.client.services;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashMap;
 import java.util.Map;
 
 @Setter
 @Getter
-@Builder
-public class ParamsBuilder<String, V> {
-    private Map<String, V> pathParams;
-    private Map<String, V> queryParams;
+@NoArgsConstructor
+@AllArgsConstructor
+public class ParamsBuilder<String, T> {
+    private Map<String, T> pathParams = new HashMap<>();
+    private Map<String, T> queryParams = new HashMap<>();
+
+    public ParamsBuilder<String, T> pathParam(String key, T value) {
+        this.pathParams.put(key, value);
+        return this;
+    }
+
+    public ParamsBuilder<String, T> queryParam(String key, T value) {
+        this.queryParams.put(key, value);
+        return this;
+    }
 }
