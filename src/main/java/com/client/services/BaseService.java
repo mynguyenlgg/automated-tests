@@ -30,7 +30,7 @@ public class BaseService {
     }
 
     protected ParamsBuilder<String, String> getParamsBuilder() {
-        return ParamsBuilder.<String, String>builder().build();
+        return new ParamsBuilder<>();
     }
 
     protected ResponseSpecification getResponseSpec() {
