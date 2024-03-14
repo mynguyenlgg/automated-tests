@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-
-public class TC003_DeleteBoard {
+public class TC003_DeleteBoard extends TestBase{
     private String boardName = FakerUtils.generateName();
     private String boardID;
     BoardService boardClient = new BoardService();

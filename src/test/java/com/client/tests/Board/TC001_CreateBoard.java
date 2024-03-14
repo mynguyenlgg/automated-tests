@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-public class TC001_CreateBoard {
+public class TC001_CreateBoard extends TestBase {
     private String boardName = FakerUtils.generateName();
     private String boardID;
     BoardService boardService = new BoardService();

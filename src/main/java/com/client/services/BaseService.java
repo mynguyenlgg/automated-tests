@@ -1,12 +1,14 @@
 package com.client.services;
 
 import com.client.config.Configuration;
+import com.client.config.RestAssuredRequestLogger;
+import com.client.config.RestAssuredResponseLogger;
 import com.client.response.ResponseClient;
-import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.mapper.ObjectMapperType;
@@ -21,12 +23,13 @@ public class BaseService {
     protected RequestSpecification request;
 
     protected RequestSpecification getRequestSpec() {
+        RestAssuredConfig config = RestAssured.config()
+                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
         return new RequestSpecBuilder()
-                .setConfig(RestAssured.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)))
+                .setConfig(config)
                 .setBaseUri(this.configuration.getBaseUrl())
                 .setContentType(ContentType.JSON)
-                .build()
-                .filter(new AllureRestAssured());
+                .build().filters(new RestAssuredRequestLogger(), new RestAssuredResponseLogger());
     }
 
     protected ParamsBuilder<String, String> getParamsBuilder() {
@@ -65,6 +68,7 @@ public class BaseService {
                 .then()
                 .spec(getResponseSpec())
                 .extract().response();
+
         return new ResponseClient(response);
     }
 }

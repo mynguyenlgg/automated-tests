@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class TC002_GetBoard {
+public class TC002_GetBoard extends TestBase {
     private String boardName = FakerUtils.generateName();
     private String boardID;
     BoardService boardClient = new BoardService();
