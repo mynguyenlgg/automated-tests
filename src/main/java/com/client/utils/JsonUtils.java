@@ -6,8 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,10 +19,8 @@ import java.util.Map;
 
 public class JsonUtils {
 
-    private static final Logger log = LoggerFactory.getLogger(JsonUtils.class);
-
     public static <T> List<T> toList(String jsonPath, Type type) {
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         return gson.fromJson(reader, type);
@@ -32,7 +28,7 @@ public class JsonUtils {
 
     public static <T> List<T> toList(String jsonPath, Class<T> clazz) {
         Type type = TypeToken.getParameterized(Collection.class, clazz).getType();
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         return gson.fromJson(reader, type);
@@ -45,21 +41,21 @@ public class JsonUtils {
     }
 
     public static <T> T to(String jsonPath, Type type) {
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         return gson.fromJson(reader, type);
     }
 
     public static <T> T to(String jsonPath, Class<T> clazz) {
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         return gson.fromJson(reader, clazz);
     }
 
     public static <T> T to(String jsonPath, String key, Class<T> clazz) {
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(reader, JsonObject.class);
@@ -71,7 +67,7 @@ public class JsonUtils {
     }
 
     public static <T> T to(String jsonPath, String key, Type type) {
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(reader, JsonObject.class);
@@ -83,7 +79,7 @@ public class JsonUtils {
     }
 
     public static <T> List<T> toList(String jsonPath, String key, Class<T> clazz) {
-        log.debug("Load json from {}", jsonPath);
+        Log.debug("Load json from" + jsonPath);
         JsonReader reader = getJsonReader(jsonPath);
         Gson gson = new Gson();
         JsonObject json = gson.fromJson(reader, JsonObject.class);
