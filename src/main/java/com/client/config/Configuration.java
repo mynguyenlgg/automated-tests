@@ -21,8 +21,8 @@ public class Configuration {
         if (instance == null) {
             instance = new Configuration();
             instance.setBaseUrl(Utils.getEnv("BASE_URL", "https://api.trello.com/1/"));
-            instance.setAppKey(Utils.getEnv("CLIENT_KEY", "55cf0355c635df635828831ef4ea3ab8"));
-            instance.setAppToken(Utils.getEnv("CLIENT_TOKEN", "ATTAb468c12820b3de25936d65837c0cc295f5f22213a9d5459db7422e64aad1ea63810E7184"));
+            instance.setAppKey(Utils.getEnv("CLIENT_KEY", StringUtils.EMPTY));
+            instance.setAppToken(Utils.getEnv("CLIENT_TOKEN", StringUtils.EMPTY));
         }
         return instance;
     }
