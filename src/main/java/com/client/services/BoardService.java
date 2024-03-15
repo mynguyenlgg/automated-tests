@@ -1,5 +1,7 @@
 package com.client.services;
 
+import com.client.config.Configuration;
+import com.client.param.ParamsBuilder;
 import com.client.response.ResponseClient;
 import io.qameta.allure.Step;
 
@@ -8,9 +10,7 @@ public class BoardService extends BaseService {
     private final String BOARD_ID_PATH = BOARD_PATH + "{id}";
 
     public BoardService() {
-        this.requestSpecification = super.getRequestSpec()
-                .queryParams("key", this.configuration.getAppKey())
-                .queryParams("token", this.configuration.getAppToken());
+        super(Configuration.getInstance().getAppKey(), Configuration.getInstance().getAppToken());
     }
 
     private ParamsBuilder<String, String> getPathParamBoard(String boardId) {

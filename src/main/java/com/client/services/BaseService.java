@@ -1,6 +1,7 @@
 package com.client.services;
 
 import com.client.config.Configuration;
+import com.client.param.ParamsBuilder;
 import com.client.response.ResponseClient;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -13,57 +14,62 @@ import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import lombok.Getter;
 
+@Getter
 public class BaseService {
-    protected final Configuration configuration = Configuration.getInstance();
     protected RequestSpecification requestSpecification;
 
-    protected RequestSpecification request;
-
-    protected RequestSpecification getRequestSpec() {
-        return new RequestSpecBuilder()
+    public BaseService() {
+        this.requestSpecification = new RequestSpecBuilder()
                 .setConfig(RestAssured.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)))
-                .setBaseUri(this.configuration.getBaseUrl())
+                .setBaseUri(Configuration.getInstance().getBaseUrl())
                 .setContentType(ContentType.JSON)
                 .build()
                 .filter(new AllureRestAssured());
+    }
+
+    public BaseService(String key, String token) {
+        this();
+        this.requestSpecification
+                .queryParams("key", key)
+                .queryParams("token", token);
     }
 
     protected ParamsBuilder<String, String> getParamsBuilder() {
         return new ParamsBuilder<>();
     }
 
-    protected ResponseSpecification getResponseSpec() {
+    protected ResponseSpecification getResponseSpecification() {
         return new ResponseSpecBuilder().build();
     }
 
-    protected <V> ResponseClient get(String path, ParamsBuilder<String, V> params) {
+    protected <T> ResponseClient get(String path, ParamsBuilder<String, T> params) {
         return request(Method.GET, path, params);
     }
 
-    protected <V> ResponseClient delete(String path, ParamsBuilder<String, V> params) {
+    protected <T> ResponseClient delete(String path, ParamsBuilder<String, T> params) {
         return request(Method.DELETE, path, params);
     }
 
-    protected <V> ResponseClient post(String path, ParamsBuilder<String, V> params) {
+    protected <T> ResponseClient post(String path, ParamsBuilder<String, T> params) {
         return request(Method.POST, path, params);
     }
 
-    protected <V> ResponseClient request(Method method, String path, ParamsBuilder<String, V> params) {
-        this.request = RestAssured.given(this.requestSpecification);
+    protected <T> ResponseClient request(Method method, String path, ParamsBuilder<String, T> params) {
         if (params != null) {
             if (params.getPathParams() != null) {
-                this.request.pathParams(params.getPathParams());
+                this.requestSpecification.pathParams(params.getPathParams());
             }
             if (params.getQueryParams() != null) {
-                this.request.queryParams(params.getQueryParams());
+                this.requestSpecification.queryParams(params.getQueryParams());
             }
         }
 
-        Response response = this.request
+        Response response = RestAssured.given(this.requestSpecification)
                 .request(method, path)
                 .then()
-                .spec(getResponseSpec())
+                .spec(getResponseSpecification())
                 .extract().response();
         return new ResponseClient(response);
     }

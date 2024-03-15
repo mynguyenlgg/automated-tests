@@ -1,4 +1,4 @@
-package com.client.tests.Board;
+package com.client.tests.board;
 
 import com.client.model.Board;
 import com.client.response.ResponseClient;
@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class TC003_DeleteBoard {
-    private String boardName = FakerUtils.generateName();
+public class DeleteBoardTests {
+    private final String boardName = FakerUtils.generateName();
     private String boardID;
-    BoardService boardClient = new BoardService();
+    private final BoardService boardClient = new BoardService();
 
     @BeforeClass
     public void prepareData() {

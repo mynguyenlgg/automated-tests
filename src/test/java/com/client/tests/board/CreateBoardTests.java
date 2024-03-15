@@ -1,4 +1,4 @@
-package com.client.tests.Board;
+package com.client.tests.board;
 
 import com.client.model.Board;
 import com.client.response.ResponseClient;
@@ -11,10 +11,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-public class TC001_CreateBoard {
-    private String boardName = FakerUtils.generateName();
+public class CreateBoardTests {
+    private final String boardName = FakerUtils.generateName();
     private String boardID;
-    BoardService boardService = new BoardService();
+    private final BoardService boardService = new BoardService();
 
     @AfterClass
     public void cleanUp() {
