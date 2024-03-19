@@ -13,17 +13,17 @@ import static org.hamcrest.Matchers.*;
 public class DeleteBoardTests {
     private final String boardName = FakerUtils.generateName();
     private String boardID;
-    private final BoardService boardClient = new BoardService();
+    private final BoardService boardService = new BoardService();
 
     @BeforeClass
     public void prepareData() {
-        Board board = boardClient.createBoard(boardName).getBody(Board.class);
+        Board board = boardService.createBoard(boardName).getBody(Board.class);
         boardID = board.getId();
     }
 
     @Test(description = "TC003 - Delete a board")
     public void deleteBoard() {
-        ResponseClient response = boardClient.deleteBoard(boardID);
+        ResponseClient response = boardService.deleteBoard(boardID);
         assertThat("Incorrect response code", response.getStatusCode(), is(200));
     }
 }

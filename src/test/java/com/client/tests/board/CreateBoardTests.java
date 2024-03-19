@@ -7,6 +7,7 @@ import com.client.utils.FakerUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -29,6 +30,6 @@ public class CreateBoardTests {
 
         assertThat("Incorrect response code", responseClient.getStatusCode(), is(200));
         assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
-        assertThat("Incorrect Board schema", responseClient.isMatchesSchema("board.json"));
+        assertThat("Incorrect Board schema", responseClient.getBodyString(), matchesJsonSchemaInClasspath("schemas/board.json"));
     }
 }

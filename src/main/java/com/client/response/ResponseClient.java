@@ -4,15 +4,8 @@ import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import lombok.Getter;
 import lombok.Setter;
-import org.hamcrest.Matcher;
-
-import java.io.File;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 
 public class ResponseClient {
-
-    private static final String SCHEMA_FILE = "src/test/resources/schema/";
 
     @Setter
     @Getter
@@ -38,11 +31,5 @@ public class ResponseClient {
 
     public int getStatusCode() {
         return this.response.getStatusCode();
-    }
-
-    public boolean isMatchesSchema(String fileName) {
-        String actual = getBodyString();
-        Matcher<String> matcher = matchesJsonSchema(new File(SCHEMA_FILE + fileName));
-        return matcher.matches(actual);
     }
 }

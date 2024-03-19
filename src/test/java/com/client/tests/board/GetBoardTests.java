@@ -14,22 +14,22 @@ import static org.hamcrest.Matchers.*;
 public class GetBoardTests {
     private final String boardName = FakerUtils.generateName();
     private String boardID;
-    private final BoardService boardClient = new BoardService();
+    private final BoardService boardService = new BoardService();
 
     @BeforeClass
     public void prepareData() {
-        Board board = boardClient.createBoard(boardName).getBody(Board.class);
+        Board board = boardService.createBoard(boardName).getBody(Board.class);
         boardID = board.getId();
     }
 
     @AfterClass
     public void cleanUp() {
-        boardClient.deleteBoard(boardID);
+        boardService.deleteBoard(boardID);
     }
 
     @Test(description = "TC002 - Get a created board")
     public void getCreatedBoard() {
-        ResponseClient response = boardClient.getBoard(boardID);
+        ResponseClient response = boardService.getBoard(boardID);
         Board board = response.getBody(Board.class);
 
         assertThat("Incorrect response code", response.getStatusCode(), is(200));
