@@ -1,9 +1,7 @@
 package com.client.config;
 
-import com.client.utils.Utils;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 
 @Setter
 @Getter
@@ -20,9 +18,9 @@ public class Configuration {
     public static Configuration getInstance() {
         if (instance == null) {
             instance = new Configuration();
-            instance.setBaseUrl(Utils.getEnv("BASE_URL", "https://api.trello.com/1/"));
-            instance.setAppKey(Utils.getEnv("CLIENT_KEY", StringUtils.EMPTY));
-            instance.setAppToken(Utils.getEnv("CLIENT_TOKEN", StringUtils.EMPTY));
+            instance.setBaseUrl(System.getProperty("BASE_URL", "https://api.trello.com/1/"));
+            instance.setAppKey(System.getProperty("CLIENT_KEY"));
+            instance.setAppToken(System.getProperty("CLIENT_TOKEN"));
         }
         return instance;
     }

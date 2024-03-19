@@ -26,11 +26,10 @@ jobs:
           cache: 'maven'
 
       - name: Run Tests
-        env:
-          CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
-          CLIENT_TOKEN: ${{ secrets.CLIENT_TOKEN }}
-        run: mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}}
         continue-on-error: true
+        run: |
+          mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
+            -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
 
       - name: Setup Allure History
         uses: actions/checkout@v4.1.1
