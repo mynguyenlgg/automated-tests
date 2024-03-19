@@ -1,5 +1,6 @@
 package com.client.tests.Board;
 
+import com.client.config.AllureRestAssuredLogger;
 import io.qameta.allure.Allure;
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;

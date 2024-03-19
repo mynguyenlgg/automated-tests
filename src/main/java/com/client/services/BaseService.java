@@ -1,14 +1,20 @@
 package com.client.services;
 
+import com.client.config.AllureRestAssuredLogger;
 import com.client.config.Configuration;
 import com.client.config.RestAssuredRequestLogger;
 import com.client.config.RestAssuredResponseLogger;
 import com.client.response.ResponseClient;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.config.LogConfig;
 import io.restassured.config.ObjectMapperConfig;
 import io.restassured.config.RestAssuredConfig;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.mapper.ObjectMapperType;
@@ -23,13 +29,15 @@ public class BaseService {
     protected RequestSpecification request;
 
     protected RequestSpecification getRequestSpec() {
+        LogConfig logConfig = RestAssured.config().getLogConfig().enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
         RestAssuredConfig config = RestAssured.config()
-                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON));
+                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)).logConfig(logConfig);
+
         return new RequestSpecBuilder()
                 .setConfig(config)
                 .setBaseUri(this.configuration.getBaseUrl())
                 .setContentType(ContentType.JSON)
-                .build().filters(new RestAssuredRequestLogger(), new RestAssuredResponseLogger());
+                .build();
     }
 
     protected ParamsBuilder<String, String> getParamsBuilder() {
@@ -64,6 +72,7 @@ public class BaseService {
         }
 
         Response response = this.request
+                .filters(new AllureRestAssuredLogger())
                 .request(method, path)
                 .then()
                 .spec(getResponseSpec())
