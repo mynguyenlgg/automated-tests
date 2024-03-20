@@ -18,10 +18,10 @@ import lombok.Getter;
 
 @Getter
 public class BaseService {
-    protected RequestSpecification requestSpecification;
+    private final RequestSpecification requestSpec;
 
     public BaseService() {
-        this.requestSpecification = new RequestSpecBuilder()
+        this.requestSpec = new RequestSpecBuilder()
                 .setConfig(RestAssured.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)))
                 .setBaseUri(Configuration.getInstance().getBaseUrl())
                 .setContentType(ContentType.JSON)
@@ -29,12 +29,10 @@ public class BaseService {
                 .filter(new AllureRestAssured());
     }
 
-    public BaseService(String key, String token) {
-        this();
-        this.requestSpecification
-                .queryParams("key", key)
-                .queryParams("token", token);
+    protected RequestSpecification getRequestSpec() {
+        return requestSpec;
     }
+
 
     protected ParamsBuilder<String, String> getParamsBuilder() {
         return new ParamsBuilder<>();
@@ -59,14 +57,14 @@ public class BaseService {
     protected <T> ResponseClient request(Method method, String path, ParamsBuilder<String, T> params) {
         if (params != null) {
             if (params.getPathParams() != null) {
-                this.requestSpecification.pathParams(params.getPathParams());
+                getRequestSpec().pathParams(params.getPathParams());
             }
             if (params.getQueryParams() != null) {
-                this.requestSpecification.queryParams(params.getQueryParams());
+                getRequestSpec().queryParams(params.getQueryParams());
             }
         }
 
-        Response response = RestAssured.given(this.requestSpecification)
+        Response response = RestAssured.given(getRequestSpec())
                 .request(method, path)
                 .then()
                 .spec(getResponseSpecification())
