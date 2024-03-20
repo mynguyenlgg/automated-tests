@@ -29,14 +29,16 @@ public class TC001_CreateBoard extends TestBase {
         Board board = responseClient.getBody(Board.class);
         boardID = board.getId();
 
+        ResponseClient response = boardService.getBoard(boardID);
+
         responseClient.getResponse()
                 .then()
                 .statusCode(400);
 
-//        softHamcrestAssert.assertThat("Incorrect response code", responseClient.getStatusCode(), is(400));
-//        softHamcrestAssert.assertThat("Incorrect Board Name", board.getName(), equalTo(boardName+200));
-//        softHamcrestAssert.assertThat("Incorrect Board schema", responseClient.getBodyString(), matchesJsonSchemaInClasspath("schema/board.json"));
-//
-//        softHamcrestAssert.assertAll();
+        softHamcrestAssert.assertThat("Incorrect response code", responseClient.getStatusCode(), is(400));
+        softHamcrestAssert.assertThat("Incorrect Board Name", board.getName(), equalTo(boardName+200));
+        softHamcrestAssert.assertThat("Incorrect Board schema", responseClient.getBodyString(), matchesJsonSchemaInClasspath("schema/board.json"));
+
+        softHamcrestAssert.assertAll();
     }
 }
