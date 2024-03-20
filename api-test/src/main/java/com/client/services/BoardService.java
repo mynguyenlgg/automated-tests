@@ -5,12 +5,12 @@ import com.client.param.ParamsBuilder;
 import com.client.response.ResponseClient;
 import io.qameta.allure.Step;
 
-public class BoardService extends BaseService {
+public class BoardService extends AuthService {
     private final String BOARD_PATH = "boards/";
     private final String BOARD_ID_PATH = BOARD_PATH + "{id}";
 
     public BoardService() {
-        super(Configuration.getInstance().getAppKey(), Configuration.getInstance().getAppToken());
+        super();
     }
 
     private ParamsBuilder<String, String> getPathParamBoard(String boardId) {
