@@ -20,7 +20,7 @@
         <gson.version>2.10.1</gson.version>
         <slf4j.version>1.7.30</slf4j.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <suiteFile>src/test/resources/suite.testng.xml</suiteFile>
+        <suiteFile>src/test/resources/suites/regression.xml</suiteFile>
     </properties>
 
     <build>

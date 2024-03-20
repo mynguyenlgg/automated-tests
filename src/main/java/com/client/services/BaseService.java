@@ -72,7 +72,7 @@ public class BaseService {
         }
 
         Response response = this.request
-                .filters(new AllureRestAssuredLogger())
+                .filters(new AllureRestAssured().setResponseAttachmentName("Response"))
                 .request(method, path)
                 .then()
                 .spec(getResponseSpec())
