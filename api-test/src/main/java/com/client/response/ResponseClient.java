@@ -16,7 +16,7 @@ import java.util.Set;
 
 public class ResponseClient {
 
-    private static String SCHEMA_PATH = "src/test/resources/schemas/";
+    private static final String SCHEMA_PATH = "src/test/resources/schemas/";
 
     @Setter
     @Getter

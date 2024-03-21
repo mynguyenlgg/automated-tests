@@ -14,7 +14,7 @@ public class CreateBoardTests {
     private String boardID;
     private final BoardService boardService = new BoardService();
 
-    SoftAssertions softAssertions = new SoftAssertions();
+    private final SoftAssertions softAssertions = new SoftAssertions();
 
     @AfterClass
     public void cleanUp() {
