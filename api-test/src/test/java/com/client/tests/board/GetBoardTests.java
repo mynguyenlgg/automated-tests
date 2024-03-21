@@ -4,17 +4,17 @@ import com.client.model.Board;
 import com.client.response.ResponseClient;
 import com.client.services.BoardService;
 import com.client.utils.FakerUtils;
+import com.client.utils.SoftHamcrestAssert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class GetBoardTests {
     private final String boardName = FakerUtils.generateName();
     private String boardID;
     private final BoardService boardService = new BoardService();
+    private final SoftHamcrestAssert softHamcrestAssert = new SoftHamcrestAssert();
 
     @BeforeClass
     public void prepareData() {
@@ -32,8 +32,9 @@ public class GetBoardTests {
         ResponseClient response = boardService.getBoard(boardID);
         Board board = response.getBody(Board.class);
 
-        assertThat("Incorrect response code", response.getStatusCode(), is(200));
-        assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
-        assertThat("Incorrect Board ID", board.getId(), equalTo(boardID));
+        softHamcrestAssert.assertThat("Incorrect response code", response.getStatusCode(), is(200));
+        softHamcrestAssert.assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
+        softHamcrestAssert.assertThat("Incorrect Board ID", board.getId(), equalTo(boardID));
+        softHamcrestAssert.assertAll();
     }
 }

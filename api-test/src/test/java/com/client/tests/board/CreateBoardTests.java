@@ -15,8 +15,7 @@ public class CreateBoardTests {
     private final String boardName = FakerUtils.generateName();
     private String boardID;
     private final BoardService boardService = new BoardService();
-
-    SoftHamcrestAssert softHamcrestAssert = new SoftHamcrestAssert();
+    private final SoftHamcrestAssert softHamcrestAssert = new SoftHamcrestAssert();
 
     @AfterClass
     public void cleanUp() {
