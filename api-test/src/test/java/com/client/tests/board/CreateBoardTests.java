@@ -4,17 +4,17 @@ import com.client.model.Board;
 import com.client.response.ResponseClient;
 import com.client.services.BoardService;
 import com.client.utils.FakerUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateBoardTests {
     private final String boardName = FakerUtils.generateName();
     private String boardID;
     private final BoardService boardService = new BoardService();
+
+    private final SoftAssertions softAssertions = new SoftAssertions();
 
     @AfterClass
     public void cleanUp() {
@@ -27,8 +27,9 @@ public class CreateBoardTests {
         Board board = responseClient.getBody(Board.class);
         boardID = board.getId();
 
-        assertThat("Incorrect response code", responseClient.getStatusCode(), is(200));
-        assertThat("Incorrect Board Name", board.getName(), equalTo(boardName));
-        assertThat("Incorrect Board schema", responseClient.getBodyString(), matchesJsonSchemaInClasspath("schemas/board.json"));
+        assertThat(responseClient.getStatusCode()).as("Incorrect response code").isEqualTo(200);
+        softAssertions.assertThat(board.getName()).as("Incorrect Board Name").isEqualTo(boardName);
+        softAssertions.assertThat(responseClient.getSchemaValidations("board.json")).as("Incorrect Board schema").isEmpty();
+        softAssertions.assertAll();
     }
 }
