@@ -1,5 +1,6 @@
 package com.client.listeners;
 
+import com.client.config.Configuration;
 import io.qameta.allure.listener.TestLifecycleListener;
 import io.qameta.allure.model.Attachment;
 import io.qameta.allure.model.Status;
@@ -16,7 +17,8 @@ public class AllureTestListener implements TestLifecycleListener {
     @Override
     public void beforeTestWrite(TestResult result) {
         log.info("Before test write: {}", result.getName());
-        if (result.getStatus() != null && result.getStatus().equals(Status.PASSED)) {
+        boolean showPassedTestsLogs = Configuration.getInstance().isShowPassedTestsLogs();
+        if (result.getStatus() != null && result.getStatus().equals(Status.PASSED) && !showPassedTestsLogs) {
             try {
                 List<StepResult> steps = result.getSteps();
                 for (StepResult stepResult : steps) {
