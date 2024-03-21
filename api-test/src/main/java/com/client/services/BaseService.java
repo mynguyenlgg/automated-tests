@@ -7,7 +7,10 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.config.LogConfig;
 import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.mapper.ObjectMapperType;
@@ -21,12 +24,16 @@ public class BaseService {
     private final RequestSpecification requestSpec;
 
     public BaseService() {
+        LogConfig logConfig = RestAssured.config().getLogConfig().enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
+        RestAssuredConfig config = RestAssured.config()
+                .objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)).logConfig(logConfig);
+
         this.requestSpec = new RequestSpecBuilder()
-                .setConfig(RestAssured.config().objectMapperConfig(new ObjectMapperConfig(ObjectMapperType.GSON)))
+                .setConfig(config)
                 .setBaseUri(Configuration.getInstance().getBaseUrl())
                 .setContentType(ContentType.JSON)
                 .build()
-                .filter(new AllureRestAssured());
+                .filter(new AllureRestAssured().setResponseAttachmentName("Response"));
     }
 
     protected RequestSpecification getRequestSpec() {

@@ -6,7 +6,6 @@ import com.client.services.BoardService;
 import com.client.utils.FakerUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
