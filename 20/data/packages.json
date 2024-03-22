@@ -1,1 +1,1 @@
-{"uid":"83edc06c07f9ae9e47eb6dd1b683e4e2","children":[{"name":"com.client.tests.BoardTests","children":[{"name":"createBoard","uid":"4cf6ac3481337897","parentUid":"c1d94f03596921e27ef03523bc2895e9","status":"passed","time":{"start":1709701036026,"stop":1709701038619,"duration":2593},"flaky":false,"newFailed":false,"newPassed":false,"newBroken":false,"retriesCount":0,"retriesStatusChange":false,"parameters":[],"tags":[]}],"uid":"com.client.tests.BoardTests"}],"name":"packages"}
+{"uid":"83edc06c07f9ae9e47eb6dd1b683e4e2","children":[],"name":"packages"}
