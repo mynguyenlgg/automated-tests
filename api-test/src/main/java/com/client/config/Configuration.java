@@ -10,6 +10,8 @@ public class Configuration {
     private String appKey;
     private String appToken;
     private boolean showPassedTestsLogs;
+    private boolean cleanResultsOnStart;
+    private boolean generateReportOnFinish;
 
     private static Configuration instance = null;
 
@@ -23,6 +25,8 @@ public class Configuration {
             instance.setAppKey(System.getProperty("CLIENT_KEY"));
             instance.setAppToken(System.getProperty("CLIENT_TOKEN"));
             instance.setShowPassedTestsLogs(false);
+            instance.setCleanResultsOnStart(true);
+            instance.setGenerateReportOnFinish(false);
         }
         return instance;
     }

@@ -22,12 +22,12 @@
         <commons-io.version>2.15.1</commons-io.version>
         <allure-generator.version>2.27.0</allure-generator.version>
         <json-schema-validator.version>1.0.72</json-schema-validator.version>
-        <assertj-core.version>3.8.0</assertj-core.version>
+        <assertj-core.version>3.25.3</assertj-core.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
+        <suitefile>src/test/resources/suites/regression.xml</suitefile>
     </properties>
-
     <build>
         <plugins>
             <plugin>
@@ -35,15 +35,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suitefile}</suiteXmlFile>
+                    </suiteXmlFiles>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
-                    <properties>
-                        <property>
-                            <name>listener</name>
-                            <value>com.client.listeners.TestListener</value>
-                        </property>
-                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
