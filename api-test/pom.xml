@@ -19,6 +19,10 @@
         <javafaker.version>1.0.2</javafaker.version>
         <gson.version>2.10.1</gson.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <commons-io.version>2.15.1</commons-io.version>
+        <allure-generator.version>2.27.0</allure-generator.version>
+        <json-schema-validator.version>1.0.72</json-schema-validator.version>
+        <assertj-core.version>3.8.0</assertj-core.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
@@ -34,6 +38,12 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>com.client.listeners.TestListener</value>
+                        </property>
+                    </properties>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -96,6 +106,13 @@
             <version>${allure.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-generator -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-generator</artifactId>
+            <version>${allure-generator.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -124,17 +141,26 @@
             <version>${slf4j.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.8.0</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.networknt/json-schema-validator -->
         <dependency>
             <groupId>com.networknt</groupId>
             <artifactId>json-schema-validator</artifactId>
-            <version>1.0.72</version>
+            <version>${json-schema-validator.version}</version>
         </dependency>
     </dependencies>
 </project>
