@@ -9,14 +9,15 @@ Technologies/Tools used in building the framework
 - TestNG
 - Allure Reports
 
-# Run Tests
+# Run API Tests
 ```
-mvn clean test -DsuiteFile="api-test/src/test/resources/suites/regression.xml"
+cd api-test/
+mvn clean test -DsuiteFile="src/test/resources/suites/regression.xml"
 ```
 
 # Clean locally existing allure-results and allure-report before running tests
 ```
-rm -rf allure-* && mvn clean test -DsuiteFile="api-test/src/test/resources/suites/regression.xml"
+rm -rf allure-* && mvn clean test -DsuiteFile="src/test/resources/suites/regression.xml"
 ```
 
 # Generate Allure Report

@@ -1,4 +1,4 @@
-name: Run all tests
+name: Run API tests
 run-name: ${{ github.actor }} is running tests
 
 on:
@@ -9,6 +9,9 @@ on:
         required: true
         default: 'regression.xml'
         type: string
+
+env:
+  WORK_DIR: ./api-test
 
 jobs:
   run-test:
@@ -27,8 +30,8 @@ jobs:
 
       - name: Run Tests
         continue-on-error: true
+        working-directory: ${{env.WORK_DIR}}
         run: |
-          cd api-test/
           mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
             -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
 
@@ -44,7 +47,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: api-test/allure-results
+          allure_results: ${{env.WORK_DIR}}/allure-results
           allure_history: allure-history
           keep_reports: 10
 
@@ -59,4 +62,4 @@ jobs:
       - name: Set Job Summary
         run: |
           echo "### The Allure Report below: " >> $GITHUB_STEP_SUMMARY
-          echo "#### https://mynguyenlgg.github.io/RestAssuredFramework/${{ github.run_number }} " >> $GITHUB_STEP_SUMMARY
+          echo "#### https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
