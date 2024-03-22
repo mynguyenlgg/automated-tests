@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Fri Mar 22 03:41:39 GMT 2024","Fri Mar 22 03:41:40 GMT 2024","1389","Surefire suite","Surefire test","com.client.tests.board.DeleteBoardTests","com.client.tests.board.DeleteBoardTests","deleteBoard","TC003 - Delete a board",""
-"passed","Fri Mar 22 03:41:37 GMT 2024","Fri Mar 22 03:41:38 GMT 2024","156","Surefire suite","Surefire test","com.client.tests.board.GetBoardTests","com.client.tests.board.GetBoardTests","getCreatedBoard","TC002 - Get a created board",""
-"passed","Fri Mar 22 03:41:33 GMT 2024","Fri Mar 22 03:41:35 GMT 2024","2848","Surefire suite","Surefire test","com.client.tests.board.CreateBoardTests","com.client.tests.board.CreateBoardTests","createBoard","TC001 - Create a new board",""
