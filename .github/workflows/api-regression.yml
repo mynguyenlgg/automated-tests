@@ -35,6 +35,7 @@ jobs:
         continue-on-error: true
         run: |
           echo "workspace is ${{ github.workspace }}"
+          echo "workspace is $GITHUB_WORKSPACE"
           mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
             -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
 
