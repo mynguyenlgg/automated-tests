@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./api-test
+        working-directory: ${{ github.workspace }}/api-test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -50,7 +50,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: allure-results
+          allure_results: ${{ github.workspace }}/allure-results
           allure_history: allure-history
           keep_reports: 10
 
