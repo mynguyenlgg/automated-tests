@@ -15,10 +15,8 @@ on:
 
 defaults:
   run:
-    working-directory: ./api-test
-
-env:
-  WORKSPACE: $PWD
+    shell: bash
+    working-directory: api-test
 
 jobs:
   run-test:
@@ -40,8 +38,9 @@ jobs:
         continue-on-error: true
         run: |
           echo "workspace is $GITHUB_WORKSPACE"
-          echo "workspace is ${{env.WORKSPACE}}"
+          echo "workspace is $PWD"
           echo "WORKDIR=$PWD" >> "$GITHUB_ENV"
+          echo "WORKDIR is ${{env.WORKDIR}}"
 #          mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
 #            -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
 
