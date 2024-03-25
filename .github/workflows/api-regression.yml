@@ -39,10 +39,15 @@ jobs:
         run: |
           echo "workspace is $GITHUB_WORKSPACE"
           echo "workspace is $PWD"
-          echo "WORKDIR=$PWD" >> "$GITHUB_ENV"
-          echo "WORKDIR is ${{env.WORKDIR}}"
+          echo "WORKDIR=$PWD" >> $GITHUB_ENV
+#          echo "WORKDIR is ${{env.WORKDIR}}"
 #          mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
 #            -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
+
+      - name: Workdir
+        continue-on-error: true
+        run: |
+          echo "WORKDIR is ${{env.WORKDIR}}"
 
       - name: Setup Allure History
         uses: actions/checkout@v4.1.1
@@ -56,7 +61,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: allure-results
+          allure_results: ./${{env.WORKDIR}}/allure-results
           allure_history: allure-history
           keep_reports: 10
 
