@@ -2,6 +2,9 @@ name: Run API tests
 run-name: ${{ github.actor }} is running tests
 
 on:
+  push:
+    branches:
+      - my/update_workflow_api_tests
   workflow_dispatch:
     inputs:
       test_suite_file:
@@ -17,6 +20,9 @@ jobs:
   run-test:
     name: Run tests and generate Allure Report
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORK_DIR }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -30,7 +36,6 @@ jobs:
 
       - name: Run Tests
         continue-on-error: true
-        working-directory: ${{env.WORK_DIR}}
         run: |
           mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
             -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
@@ -47,9 +52,10 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: ${{env.WORK_DIR}}/allure-results
+          allure_results: ${{ env.WORK_DIR }}/allure-results
           allure_history: allure-history
           keep_reports: 10
+
 
       - name: Publish Allure Report
         if: always()
