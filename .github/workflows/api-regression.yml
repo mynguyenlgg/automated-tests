@@ -1,4 +1,4 @@
-name: Run all tests
+name: Run API tests
 run-name: ${{ github.actor }} is running tests
 
 on:
@@ -10,10 +10,16 @@ on:
         default: 'regression.xml'
         type: string
 
+env:
+  WORK_DIR: ./api-test
+
 jobs:
   run-test:
     name: Run tests and generate Allure Report
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORK_DIR }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -43,9 +49,10 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: allure-results
+          allure_results: ${{ env.WORK_DIR }}/allure-results
           allure_history: allure-history
           keep_reports: 10
+
 
       - name: Publish Allure Report
         if: always()
@@ -58,4 +65,4 @@ jobs:
       - name: Set Job Summary
         run: |
           echo "### The Allure Report below: " >> $GITHUB_STEP_SUMMARY
-          echo "#### https://mynguyenlgg.github.io/RestAssuredFramework/${{ github.run_number }} " >> $GITHUB_STEP_SUMMARY
+          echo "#### https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/${{ github.run_number }}" >> $GITHUB_STEP_SUMMARY
