@@ -13,13 +13,18 @@ on:
         default: 'regression.xml'
         type: string
 
+defaults:
+  run:
+    working-directory: ./api-test
+
+env:
+  WORKSPACE: $PWD
+
 jobs:
   run-test:
     name: Run tests and generate Allure Report
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}/api-test
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
@@ -34,10 +39,11 @@ jobs:
       - name: Run Tests
         continue-on-error: true
         run: |
-          echo "workspace pwd is ${PWD}"
           echo "workspace is $GITHUB_WORKSPACE"
-          mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
-            -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
+          echo "workspace is ${{env.WORKSPACE}}"
+          echo "WORKDIR=$PWD" >> "$GITHUB_ENV"
+#          mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
+#            -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
 
       - name: Setup Allure History
         uses: actions/checkout@v4.1.1
@@ -51,7 +57,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: ${PWD}/allure-results
+          allure_results: ${{env.WORKDIR}}/allure-results
           allure_history: allure-history
           keep_reports: 10
 
