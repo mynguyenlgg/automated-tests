@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} is running tests
 on:
   push:
     branches:
-      - my/update_workflow_api_tests
+      - my/update_actions
   workflow_dispatch:
     inputs:
       test_suite_file:
@@ -34,7 +34,7 @@ jobs:
       - name: Run Tests
         continue-on-error: true
         run: |
-          echo "workspace is ${{ github.workspace }}"
+          echo "workspace pwd is ${PWD}"
           echo "workspace is $GITHUB_WORKSPACE"
           mvn clean test -DsuiteFile=src/test/resources/suites/${{inputs.test_suite_file}} \
             -DCLIENT_KEY=${{ secrets.CLIENT_KEY }} -DCLIENT_TOKEN=${{ secrets.CLIENT_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          allure_results: ${{ github.workspace }}/allure-results
+          allure_results: ${PWD}/allure-results
           allure_history: allure-history
           keep_reports: 10
 
