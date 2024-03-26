@@ -13,11 +13,11 @@ jobs:
 
       - name: Run TA tests
         env:
-          HTML_RESULT: ${{ github.workspace }}\results
-        run: scripts\run-tests.sh
+          HTML_RESULT: ${{ github.workspace }}/results
+        run: scripts/run-tests.sh
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: test-results
-          path: results\*
+          path: results/*
