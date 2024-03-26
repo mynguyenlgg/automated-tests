@@ -2,7 +2,7 @@ name: Run TA Tests
 
 on:
   push:
-    branches: ["main"]
+    branches: ["m/ta_demo"]
 
 jobs:
   test:
