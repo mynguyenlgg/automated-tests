@@ -9,7 +9,7 @@ public class Board {
     private String id;
     private String name;
     private String desc;
-    private String descData;
+    private Object descData;
     private boolean closed;
     private String idOrganization;
     private Object idEnterprise;
