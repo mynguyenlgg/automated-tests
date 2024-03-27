@@ -3,6 +3,7 @@ package com.client.services;
 import com.client.config.Configuration;
 import com.client.param.ParamsBuilder;
 import com.client.response.ResponseClient;
+import com.google.gson.JsonObject;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -61,7 +62,15 @@ public class BaseService {
         return request(Method.POST, path, params);
     }
 
-    protected <T> ResponseClient request(Method method, String path, ParamsBuilder<String, T> params) {
+    protected <T> ResponseClient put(String path, ParamsBuilder<String, T> params, JsonObject body) {
+        return request(Method.PUT, path, params, body);
+    }
+
+    protected <T> ResponseClient request(Method method, String path, ParamsBuilder<String, T> params){
+        return request(method, path, params, null);
+    }
+
+    protected <T> ResponseClient request(Method method, String path, ParamsBuilder<String, T> params, JsonObject body) {
         if (params != null) {
             if (params.getPathParams() != null) {
                 getRequestSpec().pathParams(params.getPathParams());
@@ -71,7 +80,7 @@ public class BaseService {
             }
         }
 
-        Response response = RestAssured.given(getRequestSpec())
+        Response response = RestAssured.given((body != null) ? getRequestSpec().body(body) : getRequestSpec())
                 .request(method, path)
                 .then()
                 .spec(getResponseSpecification())
