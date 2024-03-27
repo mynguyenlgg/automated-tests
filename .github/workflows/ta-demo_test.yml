@@ -1,34 +1,24 @@
-      name: Run TA Tests on Ubuntu
+name: Learn Github actions workflow
 
-      on:
-        push:
-          branches: ["main"]
-        pull_request:
-          branches: ["main"]
-        workflow_dispatch:
-        schedule:
-          - cron: "30 5,17 * * *"
-      jobs:
-        test:
-          runs-on: ta-runner-ubuntu
-          steps:
-            - name: Checkout
-              uses: actions/checkout@v4.1.1
-
-            - name: Run TA tests
-              env:
-                HTML_RESULT: ${{ github.workspace }}/results
-              run: |
-                chmod +x scripts/run-tests.sh
-                scripts/run-tests.sh
-
-            - name: Upload test results
-              uses: actions/upload-artifact@v4
-              with:
-                name: test-results
-                path: results/*
+on: :
 
 
+jobs:
+  test:
+    runs-on: ta-runner-ubuntu
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
 
+      - name: Run TA tests
+        env:
+          HTML_RESULT: ${{ github.workspace }}/results
+        run: |
+          chmod +x scripts/run-tests.sh
+          scripts/run-tests.sh
 
-
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: results/*

@@ -2,7 +2,12 @@ name: Run TA Tests
 
 on:
   push:
-    branches: [ "m/ta_demo" ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5,17 * * *"
 
 jobs:
   test:
@@ -23,5 +28,3 @@ jobs:
         with:
           name: test-results
           path: results/*
-
-
