@@ -1,4 +1,4 @@
-package com.ui.factory.pattern;
+package com.ui.browser;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;

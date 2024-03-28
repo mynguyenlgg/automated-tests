@@ -1,9 +1,9 @@
 package com.ui.config;
 
 import com.microsoft.playwright.Browser;
-import com.ui.factory.pattern.BrowserConfig;
-import com.ui.factory.pattern.ChromeBrowserConfig;
-import com.ui.factory.pattern.FirefoxBrowserConfig;
+import com.ui.browser.BrowserConfig;
+import com.ui.browser.ChromeBrowserConfig;
+import com.ui.browser.FirefoxBrowserConfig;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
