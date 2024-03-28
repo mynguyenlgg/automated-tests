@@ -13,6 +13,6 @@ public class BaseTest {
     public void beforeTestBase() {
         browser = Configuration.getInstance().createBrowser();
         browserContext = browser.newContext(new Browser.NewContextOptions()
-                .setViewportSize(1600, 1080));
+                .setViewportSize(null));
     }
 }
