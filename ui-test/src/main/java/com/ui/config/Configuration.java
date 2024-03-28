@@ -5,21 +5,29 @@ import com.ui.browser.BrowserConfig;
 import com.ui.browser.ChromeBrowserConfig;
 import com.ui.browser.FirefoxBrowserConfig;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.HashMap;
 import java.util.Map;
 
-@Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Configuration {
-    private String browser;
     private static Configuration instance = null;
+
+    @Getter
+    @Setter
+    private String browser;
 
     public static Configuration getInstance() {
         if (instance == null) {
             instance = new Configuration();
             instance.setBrowser(System.getProperty("BROWSER"));
+
+            if (instance.getBrowser() == null) {
+                throw new NullPointerException("Browser can not be null");
+            }
         }
         return instance;
     }

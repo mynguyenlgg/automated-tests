@@ -8,6 +8,7 @@ public class ChromeBrowserConfig extends AbstractBrowserManager implements Brows
         return this.playwright.chromium().launch(getLaunchOptions());
     }
 
+    @Override
     public BrowserType.LaunchOptions getLaunchOptions() {
         return super.getLaunchOptions().setChannel("chrome");
     }
