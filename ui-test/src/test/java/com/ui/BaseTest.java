@@ -2,7 +2,8 @@ package com.ui;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
-import com.ui.config.Configuration;
+import com.microsoft.playwright.Playwright;
+import com.ui.browser.BrowserManager;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
@@ -11,8 +12,7 @@ public class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeTestBase() {
-        browser = Configuration.getInstance().createBrowser();
-        browserContext = browser.newContext(new Browser.NewContextOptions()
-                .setViewportSize(null));
+        browser = BrowserManager.createBrowser(Playwright.create());
+        browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
     }
 }
